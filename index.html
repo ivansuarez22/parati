@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti 💖</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffdde1;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            text-align: center;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: scale(1.1);
+        }
+        .hidden-message {
+            display: none;
+            margin-top: 10px;
+            font-size: 18px;
+            color: #e91e63;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: floatUp 3s infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card" onclick="showMessage()">
+            <h2>Para Mi Amor 💕</h2>
+            <p>Haz clic para ver un mensaje especial</p>
+            <p class="hidden-message" id="daily-message"></p>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "Eres mi razón de sonreír 😊❤️",
+            "Cada día a tu lado es un regalo 🎁💖",
+            "Te quiero más de lo que las palabras pueden decir 😘💕",
+            "Eres la estrella que ilumina mi camino ✨🥰",
+            "Contigo, cada momento es mágico 💫💞",
+            "Eres lo mejor que me ha pasado en la vida 💘🥰",
+            "Quererte es mi aventura favorita 🚀💖"
+        ];
+        
+        function showMessage() {
+            const today = new Date().getDay();
+            document.getElementById('daily-message').textContent = messages[today];
+            document.querySelector('.hidden-message').style.display = 'block';
+        }
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            document.body.appendChild(heart);
+            
+            let x = Math.random() * window.innerWidth;
+            let y = window.innerHeight;
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
